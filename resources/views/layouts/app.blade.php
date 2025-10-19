@@ -15,7 +15,7 @@
     <body class="min-h-screen bg-base-200">
         @include('components.alert')
         @php
-            $hideLayout = request()->routeIs('login', 'register', 'password.request');
+            $hideLayout = request()->routeIs('login', 'register', 'password.request', 'admin.*');
         @endphp
          @unless($hideLayout)
             @include('layouts.header')

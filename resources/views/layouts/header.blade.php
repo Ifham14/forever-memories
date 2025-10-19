@@ -2,7 +2,12 @@
     <div class="container mx-auto flex items-center justify-between">
         <!-- Left: Company logo/text -->
         <div class="flex items-center space-x-2">
-            <span class="text-2xl font-bold text-gray-800 select-none cursor-default">Forever Memories</span>
+            <img 
+                src="{{ asset('images/forever-memories-logo.png') }}" 
+                alt="Forever Memories Logo" 
+                class="w-8 h-8 select-none"
+            >
+            <span class="text-2xl text-gray-800 select-none cursor-default">Forever Memories</span>
         </div>
 
         <!-- Center: Navigation -->
@@ -41,8 +46,8 @@
             <div class="flex items-center space-x-3">
                 <img src="{{ auth()->user()->profile_photo_url ?? 'https://avatar.iran.liara.run/public/boy' }}" alt="Profile Picture" class="w-10 h-10 rounded-full object-cover border border-gray-300" />
                 <div class="text-sm">
-                    <p class="font-semibold text-gray-800">John Doe</p>
-                    <p class="text-gray-500">abc@email.com</p>
+                    <p class="font-semibold text-gray-800">{{ auth()->user()->name }}</p>
+                    <p class="text-gray-500">{{ auth()->user()->email }}</p>
                 </div>
             </div>
         </div>

@@ -24,7 +24,15 @@ class LoginController extends Controller
         $remember = $request->boolean('remember');
         if (Auth::attempt($credentials, $remember)) {
             $request->session()->regenerate();
-            return redirect()->intended(RouteServiceProvider::HOME);
+            // return redirect()->intended(RouteServiceProvider::HOME);
+            
+            $user = Auth::user();
+            //Redirect based on role
+            if ($user->role === 'admin') {
+                return redirect()->intended('/admin/dashboard');
+            }
+
+            return redirect()->intended('/dashboard');
         }
         return back()
             ->withErrors(['email' => 'The provided credentials do not match our records.'])

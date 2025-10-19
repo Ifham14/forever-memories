@@ -9,6 +9,20 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JourneyController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\AdminController;
+
+// Route::get('/', function () {
+//     return auth()->check() ? redirect()->route('dashboard') : redirect()->route('login');
+// });
+Route::get('/', function () {
+    if (auth()->check()) {
+        return auth()->user()->role === 'admin'
+            ? redirect()->route('admin.dashboard')
+            : redirect()->route('dashboard');
+    }
+
+    return redirect()->route('login');
+});
 
 // Login
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -24,12 +38,6 @@ Route::get('/forgot-password', [ForgotPasswordController::class, 'showLinkReques
 Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->middleware('guest')->name('password.email');
 Route::get('/reset-password/{token}', [ResetPasswordController::class, 'showResetForm'])->middleware('guest')->name('password.reset');
 Route::post('/reset-password', [ResetPasswordController::class, 'reset'])->middleware('guest')->name('password.update');
-
-// Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard'); //dummy route
-// Route::get('/journey/{id}', [JourneyController::class, 'show'])->name('journey.show'); //dummy route
-// Route::get('/journeys/create', [JourneyController::class, 'create'])->name('journey.create'); //dummy route
- //dummy route
-// Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit'); //dummy route
 
 Route::middleware('auth')->group(function () {
     //Dashboard
@@ -47,4 +55,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
+});
+
+
+Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/dashboard', [App\Http\Controllers\AdminController::class, 'index'])->name('dashboard');
+    Route::get('/users', [App\Http\Controllers\AdminController::class, 'index'])->name('users.index');
+    Route::get('/users/{user}', [App\Http\Controllers\AdminController::class, 'show'])->name('users.show');
+    Route::get('/users/{user}/edit-password', [App\Http\Controllers\AdminController::class, 'editPassword'])->name('users.editPassword');
+    Route::put('/users/{user}/update-password', [App\Http\Controllers\AdminController::class, 'updatePassword'])->name('users.updatePassword');
 });
