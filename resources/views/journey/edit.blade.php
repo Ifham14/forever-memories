@@ -30,7 +30,7 @@
                 </div>
 
                 <div>
-                    <label class="block font-semibold mb-1 text-gray-700">Story</label>
+                    <label class="block font-semibold mb-1 text-gray-700">Story <span class="text-red-500">*</span></label>
                     <textarea name="story" rows="5" class="w-full border rounded px-3 py-2" required>{{ old('story', $journey->story) }}</textarea>
                 </div>
 

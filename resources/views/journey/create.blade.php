@@ -23,7 +23,7 @@
                     </div>
 
                     <div class="md:col-span-2">
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Story</label>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Story <span class="text-red-500">*</span></label></label>
                         <textarea name="story" rows="6" placeholder="Write the story..." class="w-full rounded-2xl border border-gray-300 px-4 py-2 focus:ring focus:ring-blue-200 focus:outline-none resize-none"></textarea>
                     </div>
                 </div>

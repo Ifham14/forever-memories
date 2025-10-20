@@ -7,6 +7,8 @@ use App\Models\JourneyImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Log;
 
 class JourneyController extends Controller
 {
@@ -46,7 +48,7 @@ class JourneyController extends Controller
             'grateful_hearts' => 'nullable|string',
             'interment' => 'nullable|string',
             'final_arrangement_entrusted_to' => 'nullable|string',
-            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5000',
+            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:10000',
         ]);
         DB::beginTransaction();
         try {
@@ -83,7 +85,7 @@ class JourneyController extends Controller
             return redirect()->route('dashboard')->with('success', 'Journey created successfully.');
         } catch (\Throwable $e) {
             DB::rollBack();
-            \Log::error('Journey store error: '.$e->getMessage());
+            // \Log::error('Journey store error: '.$e->getMessage());
             return back()->withErrors('An error occurred while saving.')->withInput();
         }
     }
@@ -120,7 +122,7 @@ class JourneyController extends Controller
             'grateful_hearts' => 'nullable|string',
             'interment' => 'nullable|string',
             'final_arrangement_entrusted_to' => 'nullable|string',
-            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5048',
+            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:10000',
         ]);
         DB::beginTransaction();
         try {

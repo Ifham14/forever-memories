@@ -49,11 +49,15 @@
                         <label class="flex items-center text-gray-700">
                             <input type="checkbox" name="remember" class="mr-2"> Remember me
                         </label>
-                        <a href="{{ route('password.request') }}" class="text-sm text-blue-600 hover:underline">Forgot password?</a>
+                        <!-- <a href="{{ route('password.request') }}" class="text-sm text-blue-600 hover:underline">Forgot password?</a> -->
                     </div>
 
                     <button type="submit" class="w-full bg-[#FCDA98] hover:bg-[#ffc248] py-2 rounded-md  transition cursor-pointer"> Login </button>
                 </form>
+                <p class="mt-4 text-center text-sm text-gray-600">
+                    Dont have an account yet?
+                    <a href="{{ route('register') }}" class="text-blue-600 hover:underline">Register</a>
+                </p>
             </div>
         </div>
         <p class="text-white text-center text-sm mt-6 z-10 relative">
