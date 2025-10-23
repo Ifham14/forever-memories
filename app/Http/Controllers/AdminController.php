@@ -31,4 +31,16 @@ class AdminController extends Controller
 
         return redirect()->route('admin.users.show', $user)->with('success', 'Password updated successfully.');
     }
+
+    public function toggleActive(Request $request, User $user)
+    {
+        $user->is_active = !$user->is_active;
+        $user->save();
+
+        return response()->json([
+            'success' => true,
+            'status' => $user->is_active ? 'activated' : 'deactivated',
+            'user_id' => $user->id,
+        ]);
+    }
 }

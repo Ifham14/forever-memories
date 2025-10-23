@@ -34,8 +34,22 @@ class ProfileController extends Controller
             'address' => ['nullable', 'string'],
             'guardian_email' => ['nullable', 'email'],
             'email' => ['required','email','max:255','unique:users,email,'.$user->id],
+            'profile_picture' => ['nullable', 'image', 'max:5000'],
         ]);
 
+        if ($request->hasFile('profile_picture')) {
+            $file = $request->file('profile_picture');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->storeAs('public/profile_pictures', $filename);
+
+            // delete old picture if exists
+            if ($user->profile_picture) {
+                \Storage::delete('public/profile_pictures/' . $user->profile_picture);
+            }
+
+            $user->profile_picture = $filename;
+        }
+        
         $user->update([
             'name' => $validated['name'],
             'email' => $validated['email'],
@@ -43,6 +57,7 @@ class ProfileController extends Controller
             'phone' => $validated['phone'] ?? null,
             'address' => $validated['address'] ?? null,
             'guardian_email' => $validated['guardian_email'] ?? null,
+            'profile_picture' => $user->profile_picture,
         ]);
 
         return redirect()->route('profile')->with('success', 'Profile updated successfully.');

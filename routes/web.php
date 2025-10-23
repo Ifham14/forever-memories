@@ -7,20 +7,15 @@ use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JourneyController;
+use App\Http\Controllers\NoteBookController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminController;
 
-// Route::get('/', function () {
-//     return auth()->check() ? redirect()->route('dashboard') : redirect()->route('login');
-// });
 Route::get('/', function () {
     if (auth()->check()) {
-        return auth()->user()->role === 'admin'
-            ? redirect()->route('admin.dashboard')
-            : redirect()->route('dashboard');
+        return auth()->user()->role === 'admin' ? redirect()->route('admin.dashboard') : redirect()->route('dashboard');
     }
-
     return redirect()->route('login');
 });
 
@@ -51,6 +46,15 @@ Route::middleware('auth')->group(function () {
     Route::delete('/journey/{journey}', [JourneyController::class, 'destroy'])->name('journey.destroy');
     Route::get('/journey/{journey}', [JourneyController::class, 'show'])->name('journey.show');
 
+    //Notebook
+    Route::get('/notebook', [NotebookController::class, 'index'])->name('notebook.index');
+    Route::get('/notebook/create', [NotebookController::class, 'create'])->name('notebook.create');
+    Route::post('/notebook', [NotebookController::class, 'store'])->name('notebook.store');
+    Route::get('/notebook/{notebook}/edit', [NotebookController::class, 'edit'])->name('notebook.edit');
+    Route::put('/notebook/{notebook}', [NotebookController::class, 'update'])->name('notebook.update');
+    Route::delete('/notebook/{notebook}', [NotebookController::class, 'destroy'])->name('notebook.destroy');
+    Route::get('/notebook/{notebook}', [NotebookController::class, 'show'])->name('notebook.show');
+
     //Profile
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -59,9 +63,10 @@ Route::middleware('auth')->group(function () {
 
 
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
-    Route::get('/dashboard', [App\Http\Controllers\AdminController::class, 'index'])->name('dashboard');
-    Route::get('/users', [App\Http\Controllers\AdminController::class, 'index'])->name('users.index');
-    Route::get('/users/{user}', [App\Http\Controllers\AdminController::class, 'show'])->name('users.show');
-    Route::get('/users/{user}/edit-password', [App\Http\Controllers\AdminController::class, 'editPassword'])->name('users.editPassword');
-    Route::put('/users/{user}/update-password', [App\Http\Controllers\AdminController::class, 'updatePassword'])->name('users.updatePassword');
+    Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
+    Route::get('/users', [AdminController::class, 'index'])->name('users.index');
+    Route::get('/users/{user}', [AdminController::class, 'show'])->name('users.show');
+    Route::get('/users/{user}/edit-password', [AdminController::class, 'editPassword'])->name('users.editPassword');
+    Route::put('/users/{user}/update-password', [AdminController::class, 'updatePassword'])->name('users.updatePassword');
+    Route::post('/users/{user}/toggle-active', [AdminController::class, 'toggleActive'])->name('users.toggle-active');
 });

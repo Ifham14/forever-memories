@@ -26,6 +26,8 @@ class User extends Authenticatable
         'address',
         'guardian_email',
         'role',
+        'is_active',
+        'profile_picture',
     ];
 
     /**

@@ -7,13 +7,28 @@
 
         <div class="flex-grow flex items-center justify-center relative z-10 py-20">
             <div class="w-full max-w-5xl bg-white rounded-lg shadow-lg p-10 space-y-6">
-                <h1 class="text-2xl font-bold text-gray-800">Profile & Setting</h1>
+                <h1 class="text-2xl font-bold text-gray-800 text-center">Profile & Settings</h1>
 
-                <div class="flex items-center justify-between">
+                <div class="flex flex-col items-center mt-6">
+                    <div class="avatar">
+                        <div class="w-32 h-32 rounded-full ring ring-[#FCDA98] ring-offset-base-100 ring-offset-2 overflow-hidden">
+                            <img src="{{ Auth::user()->profile_picture 
+                                ? asset('storage/profile_pictures/' . Auth::user()->profile_picture)
+                                : 'https://ui-avatars.com/api/?name=' . urlencode(Auth::user()->name) . '&background=random' }}"
+                                alt="Profile Picture"
+                                class="object-cover w-full h-full">
+                        </div>
+                    </div>
+                    <p class="mt-3 text-gray-600 font-medium">{{ Auth::user()->name }}</p>
+                </div>
+
+                <div class="flex items-center justify-between mt-8">
                     <h2 class="text-lg font-semibold text-gray-800">Personal Info</h2>
-                    <a href="{{ route('profile.edit') }}" class="inline-flex items-center px-4 py-2 text-sm rounded-full transition bg-[#FCDA98] hover:bg-[#ffc248]">
+                    <a href="{{ route('profile.edit') }}"
+                       class="inline-flex items-center px-4 py-2 text-sm rounded-full transition bg-[#FCDA98] hover:bg-[#ffc248]">
                         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.232 5.232l3.536 3.536M9 13l6.536-6.536a2 2 0 112.828 2.828L11.828 15.828A4 4 0 018 17H5v-3a4 4 0 011.172-2.828L15.232 5.232z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                  d="M15.232 5.232l3.536 3.536M9 13l6.536-6.536a2 2 0 112.828 2.828L11.828 15.828A4 4 0 018 17H5v-3a4 4 0 011.172-2.828L15.232 5.232z"/>
                         </svg>
                         Edit Profile
                     </a>
@@ -24,26 +39,31 @@
                         <div class="font-medium text-gray-500 mb-1">Full Name</div>
                         <div>{{ Auth::user()->name ?? "N/A" }}</div>
                     </div>
+
                     <div>
                         <div class="font-medium text-gray-500 mb-1">Email Address</div>
                         <div>{{ Auth::user()->email ?? "N/A" }}</div>
                     </div>
+
                     <div>
                         <div class="font-medium text-gray-500 mb-1">Address</div>
                         <div>{{ Auth::user()->address ?? "N/A" }}</div>
                     </div>
+
                     <div>
                         <div class="font-medium text-gray-500 mb-1">Phone Number</div>
                         <div>{{ Auth::user()->phone ?? "N/A" }}</div>
                     </div>
+
                     <div>
                         <div class="font-medium text-gray-500 mb-1">Guardian Email</div>
                         <div>{{ Auth::user()->guardian_email ?? "N/A" }}</div>
                     </div>
-                    <div class="    ">
+
+                    <div>
                         <div class="font-medium text-gray-500 mb-1">Bio</div>
                         <div class="text-gray-700 leading-relaxed">
-                           {{ Auth::user()->bio ?? "N/A" }}
+                            {{ Auth::user()->bio ?? "N/A" }}
                         </div>
                     </div>
                 </div>
