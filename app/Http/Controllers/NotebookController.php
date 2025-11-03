@@ -59,6 +59,10 @@ class NotebookController extends Controller
             'interment' => 'nullable|string',
             'final_arrangement_entrusted_to' => 'nullable|string',
             'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:10000',
+        ],[
+            'images.*.image' => 'Each uploaded file type must be an image.',
+            'images.*.mimes' => 'Each image must be a file format type: jpeg, png, jpg or gif.',
+            'images.*.max' => 'Each image may not be larger than 8MB.',
         ]);
         DB::beginTransaction();
         try {

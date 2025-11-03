@@ -49,7 +49,12 @@ class JourneyController extends Controller
             'interment' => 'nullable|string',
             'final_arrangement_entrusted_to' => 'nullable|string',
             'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:10000',
+        ], [
+            'images.*.image' => 'Each uploaded file type must be an image.',
+            'images.*.mimes' => 'Each image must be a file format type of jpeg, png, jpg or gif.',
+            'images.*.max' => 'Each image may not be larger than 10MB.',
         ]);
+
         DB::beginTransaction();
         try {
             $journey = Journey::create([
@@ -72,6 +77,7 @@ class JourneyController extends Controller
                 'interment' => $validated['interment'] ?? null,
                 'final_arrangement_entrusted_to' => $validated['final_arrangement_entrusted_to'] ?? null,
             ]);
+
             if ($request->hasFile('images')) {
                 foreach ($request->file('images') as $image) {
                     $path = $image->store('journey_images', 'public');
@@ -81,12 +87,15 @@ class JourneyController extends Controller
                     ]);
                 }
             }
+
             DB::commit();
             return redirect()->route('dashboard')->with('success', 'Journey created successfully.');
         } catch (\Throwable $e) {
             DB::rollBack();
             // \Log::error('Journey store error: '.$e->getMessage());
-            return back()->withErrors('An error occurred while saving.')->withInput();
+            return back()
+                ->with('error', 'An unexpected error occurred while saving your journey. Please try again.')
+                ->withInput();
         }
     }
 

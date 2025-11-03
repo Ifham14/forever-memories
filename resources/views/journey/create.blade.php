@@ -9,6 +9,29 @@
             <form action="{{ route('journey.store') }}" enctype="multipart/form-data" method="POST" class="w-full max-w-5xl bg-white rounded-lg shadow-lg p-10 space-y-6">
                 @csrf
 
+                {{-- Flash & Validation Messages --}}
+                @if ($errors->any())
+                    <div id="errorAlert" class="alert alert-error text-white bg-red-500 p-4 rounded mb-4">
+                        <ul class="list-disc list-inside text-sm">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
+                @if (session('success'))
+                    <div id="successAlert" class="alert alert-success text-white bg-green-500 p-4 rounded mb-4">
+                        {{ session('success') }}
+                    </div>
+                @endif
+
+                @if (session('error'))
+                    <div id="failAlert" class="alert alert-error text-white bg-red-500 p-4 rounded mb-4">
+                        {{ session('error') }}
+                    </div>
+                @endif
+
                 <h1 class="text-2xl font-bold text-gray-800">Create Journey</h1>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -87,4 +110,17 @@
             </form>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const alerts = document.querySelectorAll('#errorAlert, #successAlert, #failAlert');
+            alerts.forEach(alert => {
+                setTimeout(() => {
+                    alert.style.transition = 'opacity 0.6s ease';
+                    alert.style.opacity = '0';
+                    setTimeout(() => alert.remove(), 600);
+                }, 4000);
+            });
+        });
+    </script>
 @endsection
