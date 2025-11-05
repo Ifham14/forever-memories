@@ -10,7 +10,7 @@
                 <h1 class="text-2xl font-bold text-gray-800">{{ $notebook->title }}</h1>
 
                 <div class="mt-4 text-sm text-gray-600 flex items-center space-x-4">
-                    <span class="inline-block mt-1 bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full">{{ $notebook->status ?? 'Draft' }}</span>
+                    <!-- <span class="inline-block mt-1 bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full">{{ $notebook->status ?? 'Draft' }}</span> -->
                     <div class="flex items-center">
                         <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 00-1-1H6zm0 2h8v1H6V4z"/>
@@ -36,6 +36,7 @@
                     </div>
                 </div>
 
+                {{--
                 <div>
                     <h2 class="text-lg font-bold text-gray-800 mb-2">Sections</h2>
                     @php
@@ -78,7 +79,7 @@
                         @endforeach
                     </div>
                 </div>
-
+--}}
                 <a href="{{ url('/dashboard') }}" class="inline-flex items-center gap-2 px-5 py-2 mt-20 rounded-md transition bg-[#FCDA98] hover:bg-[#ffc248]">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />

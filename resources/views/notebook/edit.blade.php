@@ -75,7 +75,10 @@
                     <div id="previewImages" class="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-4"></div>
                 </div>
 
-                {{-- Order of Service --}}
+                 {{-- ===========================
+                     ORDER OF SERVICE (Commented)
+                ============================ --}}
+                {{--
                 <div class="mt-10">
                     <h2 class="text-lg font-bold text-gray-800 mb-4">Order of Service</h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -101,7 +104,12 @@
                     </div>
                 </div>
 
-                {{-- Additional Notes --}}
+                --}}
+                
+                {{-- ===========================
+                     ADDITIONAL NOTES (Commented)
+                ============================ --}}
+                {{--
                 <div class="mt-10">
                     <h2 class="text-lg font-bold text-gray-800 mb-4">Additional Notes</h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -132,6 +140,7 @@
                         </div>
                     </div>
                 </div>
+                --}}
 
                 {{-- Submit --}}
                 <div class="mt-8">
