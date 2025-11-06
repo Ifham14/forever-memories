@@ -80,7 +80,7 @@
                     </div>
                 </div>
 --}}
-                <a href="{{ url('/dashboard') }}" class="inline-flex items-center gap-2 px-5 py-2 mt-20 rounded-md transition bg-[#FCDA98] hover:bg-[#ffc248]">
+                <a href="{{ url('/notebook') }}" class="inline-flex items-center gap-2 px-5 py-2 mt-20 rounded-md transition bg-[#FCDA98] hover:bg-[#ffc248]">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
                     </svg>

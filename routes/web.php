@@ -45,6 +45,7 @@ Route::middleware('auth')->group(function () {
     Route::put('/journey/{journey}', [JourneyController::class, 'update'])->name('journey.update');
     Route::delete('/journey/{journey}', [JourneyController::class, 'destroy'])->name('journey.destroy');
     Route::get('/journey/{journey}', [JourneyController::class, 'show'])->name('journey.show');
+    Route::delete('/journey/{journey}', [JourneyController::class, 'destroy'])->name('journey.destroy');
 
     //Notebook
     Route::get('/notebook', [NotebookController::class, 'index'])->name('notebook.index');

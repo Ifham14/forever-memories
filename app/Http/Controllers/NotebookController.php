@@ -195,19 +195,21 @@ class NotebookController extends Controller
         }
         DB::beginTransaction();
         try {
+            $notebook->load('images');
             foreach ($notebook->images as $img) {
                 if (Storage::disk('public')->exists($img->image_path)) {
                     Storage::disk('public')->delete($img->image_path);
                 }
+                $img->delete();
             }
             $notebook->delete();
             DB::commit();
-            return redirect()->route('home')->with('success', 'Notebook deleted successfully.');
+            return redirect()->route('notebook.index')->with('success', 'Notebook deleted successfully.');
 
         } catch (\Throwable $e) {
             DB::rollBack();
-            \Log::error('Notebook delete error: ' . $e->getMessage());
-            return back()->withErrors('Failed to delete notebook.');
+            // \Log::error('Notebook delete error: ' . $e->getMessage());
+            return back()->with('error', 'Failed to delete notebook. Please try again.');
         }
     }
 

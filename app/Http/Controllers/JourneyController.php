@@ -190,19 +190,21 @@ class JourneyController extends Controller
         }
         DB::beginTransaction();
         try {
+            $journey->load('images');
             foreach ($journey->images as $img) {
                 if (Storage::disk('public')->exists($img->image_path)) {
                     Storage::disk('public')->delete($img->image_path);
                 }
+                $img->delete();
             }
             $journey->delete();
             DB::commit();
-            return redirect()->route('home')->with('success', 'Journey deleted successfully.');
+            return redirect()->route('dashboard')->with('success', 'Journey deleted successfully.');
 
         } catch (\Throwable $e) {
             DB::rollBack();
-            \Log::error('Journey delete error: ' . $e->getMessage());
-            return back()->withErrors('Failed to delete journey.');
+            // Log::error('Journey delete error: ' . $e->getMessage());
+            return back()->with('error', 'Failed to delete journey. Please try again.');
         }
     }
 
