@@ -4,10 +4,10 @@
         <div class="flex items-center space-x-2">
             <img 
                 src="{{ asset('images/forever-memories-logo.png') }}" 
-                alt="Forever Memories Logo" 
+                alt="My Life My Words My Legacy Logo" 
                 class="w-8 h-8 select-none"
             >
-            <span class="text-2xl text-gray-800 select-none cursor-default">Forever Memories</span>
+            <span class="text-gray-800 select-none cursor-default">My Life My Words My Legacy</span>
         </div>
 
         <!-- Center: Navigation -->

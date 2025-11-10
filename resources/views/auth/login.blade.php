@@ -61,7 +61,7 @@
             </div>
         </div>
         <p class="text-white text-center text-sm mt-6 z-10 relative">
-            &copy;2025 Forever Memories. All rights reserved | Designed and Developed by Futuristic Web Studios
+            &copy;2025 My Life My Words My Legacy. All rights reserved | Designed and Developed by Futuristic Web Studios
         </p> 
     </div>
 
