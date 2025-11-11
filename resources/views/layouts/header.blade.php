@@ -3,11 +3,11 @@
         <!-- Left: Company logo/text -->
         <div class="flex items-center space-x-2">
             <img 
-                src="{{ asset('images/forever-memories-logo.png') }}" 
+                src="{{ asset('images/mylife-mywords-mylegacy-logo.png') }}" 
                 alt="My Life My Words My Legacy Logo" 
-                class="w-8 h-8 select-none"
+                class="w-40 h-15 select-none"
             >
-            <span class="text-gray-800 select-none cursor-default">My Life My Words My Legacy</span>
+            <!-- <span class="text-gray-800 select-none cursor-default">My Life My Words My Legacy</span> -->
         </div>
 
         <!-- Center: Navigation -->
